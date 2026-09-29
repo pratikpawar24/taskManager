@@ -1,0 +1,16 @@
+{
+  "info": {"name":"Task Manager API","description":"Postman collection for the authenticated Task Manager API.","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable": [{"key":"baseUrl","value":"http://localhost:3000"},{"key":"token","value":""},{"key":"taskId","value":"1"}],
+  "item": [
+    {"name":"Health","request":{"method":"GET","url":"{{baseUrl}}/health"}},
+    {"name":"Register","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"name\": \"Pratik Pawar\",\n  \"email\": \"pratik@example.com\",\n  \"password\": \"StrongPass123\"\n}"},"url":"{{baseUrl}}/api/auth/register"}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"email\": \"pratik@example.com\",\n  \"password\": \"StrongPass123\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"Me","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/auth/me"}},
+    {"name":"Create Task","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}],"body":{"mode":"raw","raw":"{\n  \"title\": \"Build authentication\",\n  \"description\": \"Add JWT authentication to the API\",\n  \"status\": \"in_progress\",\n  \"due_date\": \"2026-10-05\"\n}"},"url":"{{baseUrl}}/api/tasks"}},
+    {"name":"Get All Tasks","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/tasks"}},
+    {"name":"Get Task","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/tasks/{{taskId}}"}},
+    {"name":"Update Task","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}],"body":{"mode":"raw","raw":"{\n  \"status\": \"completed\"\n}"},"url":"{{baseUrl}}/api/tasks/{{taskId}}"}},
+    {"name":"Delete Task","request":{"method":"DELETE","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/tasks/{{taskId}}"}},
+    {"name":"Protected Route Without Token (expect 401)","request":{"method":"GET","url":"{{baseUrl}}/api/tasks"}}
+  ]
+}
